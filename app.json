@@ -10,18 +10,18 @@
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#0B1929"
+      "backgroundColor": "#0A0A0F"
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.crashmediait.arcticwolves"
+      "bundleIdentifier": "com.arcticwolves.dash"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#0B1929"
+        "backgroundColor": "#0A0A0F"
       },
-      "package": "com.crashmediait.arcticwolves",
+      "package": "com.arcticwolves.dash",
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false
     },
@@ -30,8 +30,8 @@
       "name": "Arctic Wolves",
       "shortName": "AC Wolves",
       "description": "Arctic Wolves team management app",
-      "themeColor": "#0B1929",
-      "backgroundColor": "#0B1929"
+      "themeColor": "#0A0A0F",
+      "backgroundColor": "#0A0A0F"
     }
   }
 }

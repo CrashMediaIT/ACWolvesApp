@@ -1,4 +1,5 @@
 import { Platform } from 'react-native';
+import colors from '../theme/colors';
 
 function addMetaTag(name: string, content: string): void {
   const meta = document.createElement('meta');
@@ -21,7 +22,7 @@ function addLinkTag(rel: string, href: string, extras?: Record<string, string>):
 
 function injectPWAMetaTags(): void {
   addLinkTag('manifest', '/manifest.json');
-  addMetaTag('theme-color', '#0B1929');
+  addMetaTag('theme-color', colors.bgMain);
   addLinkTag('apple-touch-icon', '/icon-192x192.png');
   addMetaTag('mobile-web-app-capable', 'yes');
   addMetaTag('apple-mobile-web-app-status-bar-style', 'black-translucent');

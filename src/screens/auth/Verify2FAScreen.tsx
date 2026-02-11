@@ -9,6 +9,7 @@ import {
   Alert,
 } from 'react-native';
 import { useAuth } from '../../contexts/AuthContext';
+import colors from '../../theme/colors';
 
 export default function Verify2FAScreen() {
   const { verify2FA, state, signOut } = useAuth();
@@ -43,7 +44,7 @@ export default function Verify2FAScreen() {
         <TextInput
           style={styles.input}
           placeholder="Enter 6-digit code"
-          placeholderTextColor="#999"
+          placeholderTextColor={colors.textMuted}
           keyboardType="number-pad"
           maxLength={6}
           value={code}
@@ -58,7 +59,7 @@ export default function Verify2FAScreen() {
           disabled={state.isLoading}
         >
           {state.isLoading ? (
-            <ActivityIndicator color="#fff" />
+            <ActivityIndicator color={colors.textWhite} />
           ) : (
             <Text style={styles.buttonText}>Verify</Text>
           )}
@@ -73,30 +74,30 @@ export default function Verify2FAScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#0B1929' },
+  container: { flex: 1, backgroundColor: colors.bgMain },
   inner: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 32,
   },
-  title: { fontSize: 24, fontWeight: '700', color: '#fff', marginBottom: 8 },
+  title: { fontSize: 24, fontWeight: '700', color: colors.textWhite, marginBottom: 8 },
   subtitle: {
     fontSize: 14,
-    color: '#94A3B8',
+    color: colors.textSecondary,
     textAlign: 'center',
     marginBottom: 32,
   },
   error: {
-    color: '#EF4444',
+    color: colors.error,
     marginBottom: 16,
     textAlign: 'center',
     fontSize: 14,
   },
   input: {
     width: '100%',
-    backgroundColor: '#1E293B',
-    color: '#fff',
+    backgroundColor: colors.bgCard,
+    color: colors.textWhite,
     borderRadius: 8,
     paddingHorizontal: 16,
     paddingVertical: 14,
@@ -105,17 +106,17 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     letterSpacing: 8,
     borderWidth: 1,
-    borderColor: '#334155',
+    borderColor: colors.border,
   },
   button: {
     width: '100%',
-    backgroundColor: '#2563EB',
+    backgroundColor: colors.primary,
     borderRadius: 8,
     paddingVertical: 14,
     alignItems: 'center',
   },
   buttonDisabled: { opacity: 0.6 },
-  buttonText: { color: '#fff', fontSize: 16, fontWeight: '600' },
+  buttonText: { color: colors.textWhite, fontSize: 16, fontWeight: '600' },
   cancelButton: { marginTop: 16 },
-  cancelText: { color: '#94A3B8', fontSize: 14 },
+  cancelText: { color: colors.textSecondary, fontSize: 14 },
 });

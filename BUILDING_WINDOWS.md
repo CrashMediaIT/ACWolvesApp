@@ -111,16 +111,16 @@ The app needs to know where your backend API is located.
 Set the environment variable for the current session:
 
 ```cmd
-set EXPO_PUBLIC_API_URL=https://your-arctic-wolves-api.example.com
+set EXPO_PUBLIC_API_URL=https://api.arcticwolves.ca
 ```
 
-**Note:** Replace `https://your-arctic-wolves-api.example.com` with your actual API URL.
+**Note:** Replace `https://api.arcticwolves.ca` with your actual API URL if different.
 
 ### Option B: Using .env File (Recommended)
 
 1. Create a `.env` file in the project root:
    ```cmd
-   echo EXPO_PUBLIC_API_URL=https://your-arctic-wolves-api.example.com > .env
+   echo EXPO_PUBLIC_API_URL=https://api.arcticwolves.ca > .env
    ```
 
 2. Edit the file with Notepad to ensure the URL is correct:
@@ -136,7 +136,7 @@ set EXPO_PUBLIC_API_URL=https://your-arctic-wolves-api.example.com
 4. Under "User variables", click "New"
 5. Set:
    - **Variable name:** `EXPO_PUBLIC_API_URL`
-   - **Variable value:** `https://your-arctic-wolves-api.example.com`
+   - **Variable value:** `https://api.arcticwolves.ca`
 6. Click OK to save
 7. **Important:** Restart Command Prompt for changes to take effect
 
