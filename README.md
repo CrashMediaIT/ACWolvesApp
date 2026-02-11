@@ -21,6 +21,8 @@ Cross-platform mobile application (Android & iOS) for the [Arctic Wolves](https:
 
 ## Getting Started
 
+> **Windows Users:** See [BUILDING_WINDOWS.md](BUILDING_WINDOWS.md) for complete step-by-step instructions on building this app on Windows.
+
 ### Prerequisites
 
 - [Node.js](https://nodejs.org/) 18+
