@@ -18,7 +18,7 @@ export default function SessionDetailScreen() {
       </View>
 
       <View style={styles.card}>
-        <Text style={styles.label}>Date &amp; Time</Text>
+        <Text style={styles.label}>Date & Time</Text>
         <Text style={styles.value}>—</Text>
       </View>
 
