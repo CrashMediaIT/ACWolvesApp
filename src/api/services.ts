@@ -16,126 +16,126 @@ import type {
 
 // ── Sessions ──────────────────────────────────────────────
 export const sessionsApi = {
-  list: () => api.get<ApiResponse<Session[]>>('/api/sessions'),
-  get: (id: number) => api.get<ApiResponse<Session>>(`/api/sessions/${id}`),
-  create: (data: Partial<Session>) => api.post<ApiResponse<Session>>('/api/sessions', data),
+  list: () => api.get<ApiResponse<Session[]>>('/sessions'),
+  get: (id: number) => api.get<ApiResponse<Session>>(`/sessions/${id}`),
+  create: (data: Partial<Session>) => api.post<ApiResponse<Session>>('/sessions', data),
   update: (id: number, data: Partial<Session>) =>
-    api.put<ApiResponse<Session>>(`/api/sessions/${id}`, data),
-  delete: (id: number) => api.delete<ApiResponse<void>>(`/api/sessions/${id}`),
-  book: (id: number) => api.post<ApiResponse<void>>(`/api/sessions/${id}/book`),
-  cancel: (id: number) => api.post<ApiResponse<void>>(`/api/sessions/${id}/cancel`),
+    api.put<ApiResponse<Session>>(`/sessions/${id}`, data),
+  delete: (id: number) => api.delete<ApiResponse<void>>(`/sessions/${id}`),
+  book: (id: number) => api.post<ApiResponse<void>>(`/sessions/${id}/book`),
+  cancel: (id: number) => api.post<ApiResponse<void>>(`/sessions/${id}/cancel`),
 };
 
 // ── Athletes ──────────────────────────────────────────────
 export const athletesApi = {
-  list: () => api.get<ApiResponse<Athlete[]>>('/api/athletes'),
-  get: (id: number) => api.get<ApiResponse<Athlete>>(`/api/athletes/${id}`),
-  create: (data: Partial<Athlete>) => api.post<ApiResponse<Athlete>>('/api/athletes', data),
+  list: () => api.get<ApiResponse<Athlete[]>>('/athletes'),
+  get: (id: number) => api.get<ApiResponse<Athlete>>(`/athletes/${id}`),
+  create: (data: Partial<Athlete>) => api.post<ApiResponse<Athlete>>('/athletes', data),
   update: (id: number, data: Partial<Athlete>) =>
-    api.put<ApiResponse<Athlete>>(`/api/athletes/${id}`, data),
+    api.put<ApiResponse<Athlete>>(`/athletes/${id}`, data),
 };
 
 // ── Drills ────────────────────────────────────────────────
 export const drillsApi = {
-  list: () => api.get<ApiResponse<Drill[]>>('/api/drills'),
-  get: (id: number) => api.get<ApiResponse<Drill>>(`/api/drills/${id}`),
-  create: (data: Partial<Drill>) => api.post<ApiResponse<Drill>>('/api/drills', data),
+  list: () => api.get<ApiResponse<Drill[]>>('/drills'),
+  get: (id: number) => api.get<ApiResponse<Drill>>(`/drills/${id}`),
+  create: (data: Partial<Drill>) => api.post<ApiResponse<Drill>>('/drills', data),
   update: (id: number, data: Partial<Drill>) =>
-    api.put<ApiResponse<Drill>>(`/api/drills/${id}`, data),
-  delete: (id: number) => api.delete<ApiResponse<void>>(`/api/drills/${id}`),
+    api.put<ApiResponse<Drill>>(`/drills/${id}`, data),
+  delete: (id: number) => api.delete<ApiResponse<void>>(`/drills/${id}`),
 };
 
 // ── Practice Plans ────────────────────────────────────────
 export const practicePlansApi = {
-  list: () => api.get<ApiResponse<PracticePlan[]>>('/api/practice-plans'),
-  get: (id: number) => api.get<ApiResponse<PracticePlan>>(`/api/practice-plans/${id}`),
+  list: () => api.get<ApiResponse<PracticePlan[]>>('/practice-plans'),
+  get: (id: number) => api.get<ApiResponse<PracticePlan>>(`/practice-plans/${id}`),
   create: (data: Partial<PracticePlan>) =>
-    api.post<ApiResponse<PracticePlan>>('/api/practice-plans', data),
+    api.post<ApiResponse<PracticePlan>>('/practice-plans', data),
   update: (id: number, data: Partial<PracticePlan>) =>
-    api.put<ApiResponse<PracticePlan>>(`/api/practice-plans/${id}`, data),
-  delete: (id: number) => api.delete<ApiResponse<void>>(`/api/practice-plans/${id}`),
+    api.put<ApiResponse<PracticePlan>>(`/practice-plans/${id}`, data),
+  delete: (id: number) => api.delete<ApiResponse<void>>(`/practice-plans/${id}`),
 };
 
 // ── Evaluations ───────────────────────────────────────────
 export const evaluationsApi = {
-  list: () => api.get<ApiResponse<Evaluation[]>>('/api/evaluations'),
-  get: (id: number) => api.get<ApiResponse<Evaluation>>(`/api/evaluations/${id}`),
+  list: () => api.get<ApiResponse<Evaluation[]>>('/evaluations'),
+  get: (id: number) => api.get<ApiResponse<Evaluation>>(`/evaluations/${id}`),
   create: (data: Partial<Evaluation>) =>
-    api.post<ApiResponse<Evaluation>>('/api/evaluations', data),
+    api.post<ApiResponse<Evaluation>>('/evaluations', data),
 };
 
 // ── Messages ──────────────────────────────────────────────
 export const messagesApi = {
-  list: () => api.get<ApiResponse<Message[]>>('/api/messages'),
-  get: (id: number) => api.get<ApiResponse<Message>>(`/api/messages/${id}`),
-  send: (data: Partial<Message>) => api.post<ApiResponse<Message>>('/api/messages', data),
-  markRead: (id: number) => api.put<ApiResponse<void>>(`/api/messages/${id}/read`),
+  list: () => api.get<ApiResponse<Message[]>>('/messages'),
+  get: (id: number) => api.get<ApiResponse<Message>>(`/messages/${id}`),
+  send: (data: Partial<Message>) => api.post<ApiResponse<Message>>('/messages', data),
+  markRead: (id: number) => api.put<ApiResponse<void>>(`/messages/${id}/read`),
 };
 
 // ── Notifications ─────────────────────────────────────────
 export const notificationsApi = {
-  list: () => api.get<ApiResponse<Notification[]>>('/api/notifications'),
-  markRead: (id: number) => api.put<ApiResponse<void>>(`/api/notifications/${id}/read`),
-  markAllRead: () => api.put<ApiResponse<void>>('/api/notifications/read-all'),
+  list: () => api.get<ApiResponse<Notification[]>>('/notifications'),
+  markRead: (id: number) => api.put<ApiResponse<void>>(`/notifications/${id}/read`),
+  markAllRead: () => api.put<ApiResponse<void>>('/notifications/read-all'),
 };
 
 // ── Dashboard / Stats ─────────────────────────────────────
 export const dashboardApi = {
-  getStats: () => api.get<ApiResponse<Record<string, unknown>>>('/api/dashboard/stats'),
-  getSchedule: () => api.get<ApiResponse<Session[]>>('/api/dashboard/schedule'),
+  getStats: () => api.get<ApiResponse<Record<string, unknown>>>('/dashboard/stats'),
+  getSchedule: () => api.get<ApiResponse<Session[]>>('/dashboard/schedule'),
 };
 
 // ── Reports ───────────────────────────────────────────────
 export const reportsApi = {
-  list: () => api.get<ApiResponse<unknown[]>>('/api/reports'),
+  list: () => api.get<ApiResponse<unknown[]>>('/reports'),
   generate: (type: string, params?: Record<string, unknown>) =>
-    api.post<ApiResponse<unknown>>('/api/reports/generate', { type, ...params }),
+    api.post<ApiResponse<unknown>>('/reports/generate', { type, ...params }),
 };
 
 // ── Finance / POS ─────────────────────────────────────────
 export const financeApi = {
-  getOverview: () => api.get<ApiResponse<unknown>>('/api/finance/overview'),
-  getTransactions: () => api.get<ApiResponse<unknown[]>>('/api/finance/transactions'),
-  getBilling: () => api.get<ApiResponse<unknown[]>>('/api/finance/billing'),
+  getOverview: () => api.get<ApiResponse<unknown>>('/finance/overview'),
+  getTransactions: () => api.get<ApiResponse<unknown[]>>('/finance/transactions'),
+  getBilling: () => api.get<ApiResponse<unknown[]>>('/finance/billing'),
 };
 
 // ── HR ────────────────────────────────────────────────────
 export const hrApi = {
-  getPayroll: () => api.get<ApiResponse<unknown[]>>('/api/hr/payroll'),
-  getContracts: () => api.get<ApiResponse<unknown[]>>('/api/hr/contracts'),
-  getTimeTracking: () => api.get<ApiResponse<unknown[]>>('/api/hr/time-tracking'),
+  getPayroll: () => api.get<ApiResponse<unknown[]>>('/hr/payroll'),
+  getContracts: () => api.get<ApiResponse<unknown[]>>('/hr/contracts'),
+  getTimeTracking: () => api.get<ApiResponse<unknown[]>>('/hr/time-tracking'),
 };
 
 // ── Health ────────────────────────────────────────────────
 export const healthApi = {
   getNutrition: (athleteId: number) =>
-    api.get<ApiResponse<unknown>>(`/api/health/nutrition/${athleteId}`),
+    api.get<ApiResponse<unknown>>(`/health/nutrition/${athleteId}`),
   getWorkouts: (athleteId: number) =>
-    api.get<ApiResponse<unknown>>(`/api/health/workouts/${athleteId}`),
+    api.get<ApiResponse<unknown>>(`/health/workouts/${athleteId}`),
 };
 
 // ── Video ─────────────────────────────────────────────────
 export const videoApi = {
-  list: () => api.get<ApiResponse<unknown[]>>('/api/videos'),
-  get: (id: number) => api.get<ApiResponse<unknown>>(`/api/videos/${id}`),
+  list: () => api.get<ApiResponse<unknown[]>>('/videos'),
+  get: (id: number) => api.get<ApiResponse<unknown>>(`/videos/${id}`),
 };
 
 // ── Shop ──────────────────────────────────────────────────
 export const shopApi = {
-  getProducts: () => api.get<ApiResponse<unknown[]>>('/api/shop/products'),
-  getCategories: () => api.get<ApiResponse<unknown[]>>('/api/shop/categories'),
-  getCart: () => api.get<ApiResponse<unknown>>('/api/shop/cart'),
+  getProducts: () => api.get<ApiResponse<unknown[]>>('/shop/products'),
+  getCategories: () => api.get<ApiResponse<unknown[]>>('/shop/categories'),
+  getCart: () => api.get<ApiResponse<unknown>>('/shop/cart'),
   addToCart: (productId: number, qty: number) =>
-    api.post<ApiResponse<unknown>>('/api/shop/cart', { productId, quantity: qty }),
+    api.post<ApiResponse<unknown>>('/shop/cart', { productId, quantity: qty }),
 };
 
 // ── Admin ─────────────────────────────────────────────────
 export const adminApi = {
-  getUsers: () => api.get<ApiResponse<unknown[]>>('/api/admin/users'),
-  getAuditLogs: () => api.get<ApiResponse<unknown[]>>('/api/admin/audit-logs'),
-  getSystemHealth: () => api.get<ApiResponse<unknown>>('/api/admin/system-health'),
-  getPermissions: () => api.get<ApiResponse<unknown[]>>('/api/admin/permissions'),
-  getSettings: () => api.get<ApiResponse<unknown>>('/api/admin/settings'),
+  getUsers: () => api.get<ApiResponse<unknown[]>>('/admin/users'),
+  getAuditLogs: () => api.get<ApiResponse<unknown[]>>('/admin/audit-logs'),
+  getSystemHealth: () => api.get<ApiResponse<unknown>>('/admin/system-health'),
+  getPermissions: () => api.get<ApiResponse<unknown[]>>('/admin/permissions'),
+  getSettings: () => api.get<ApiResponse<unknown>>('/admin/settings'),
   updateSettings: (data: Record<string, unknown>) =>
-    api.put<ApiResponse<unknown>>('/api/admin/settings', data),
+    api.put<ApiResponse<unknown>>('/admin/settings', data),
 };
