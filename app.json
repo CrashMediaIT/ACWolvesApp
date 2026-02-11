@@ -26,7 +26,12 @@
       "predictiveBackGestureEnabled": false
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.png",
+      "name": "Arctic Wolves",
+      "shortName": "AC Wolves",
+      "description": "Arctic Wolves team management app",
+      "themeColor": "#0B1929",
+      "backgroundColor": "#0B1929"
     }
   }
 }
