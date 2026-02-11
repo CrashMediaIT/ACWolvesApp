@@ -58,7 +58,7 @@ npm run web
 Set the backend API URL via the `EXPO_PUBLIC_API_URL` environment variable:
 
 ```bash
-EXPO_PUBLIC_API_URL=https://your-arctic-wolves-api.example.com npx expo start
+EXPO_PUBLIC_API_URL=https://api.arcticwolves.ca npx expo start
 ```
 
 ## Project Structure

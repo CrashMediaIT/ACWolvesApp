@@ -14,14 +14,14 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.crashmediait.arcticwolves"
+      "bundleIdentifier": "com.arcticwolves.dash"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#0B1929"
       },
-      "package": "com.crashmediait.arcticwolves",
+      "package": "com.arcticwolves.dash",
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false
     },
