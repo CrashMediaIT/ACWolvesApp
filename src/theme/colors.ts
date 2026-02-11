@@ -14,7 +14,7 @@ const colors = {
   /** Card and panel backgrounds */
   bgCard: '#16161F',
 
-  /** Primary brand colour – Deep Purple */
+  /** Primary brand color – Deep Purple */
   primary: '#6B46C1',
   /** Primary hover state */
   primaryHover: '#7C3AED',
@@ -28,7 +28,7 @@ const colors = {
   /** Very muted text */
   textMuted: '#6B6B7B',
 
-  /** Default border colour */
+  /** Default border color */
   border: '#2D2D3F',
 
   /** Semantic status colours */
