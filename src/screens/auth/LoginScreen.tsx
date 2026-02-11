@@ -42,7 +42,7 @@ export default function LoginScreen() {
     >
       <View style={styles.inner}>
         <Image
-          source={require('../../../assets/icon.png')}
+          source={require('../../../assets/ArcticWolves.png')}
           style={styles.logo}
           resizeMode="contain"
         />
