@@ -73,7 +73,7 @@ export default function Verify2FAScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#0B1929' },
+  container: { flex: 1, backgroundColor: '#0A0A0F' },
   inner: {
     flex: 1,
     justifyContent: 'center',
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   title: { fontSize: 24, fontWeight: '700', color: '#fff', marginBottom: 8 },
   subtitle: {
     fontSize: 14,
-    color: '#94A3B8',
+    color: '#A8A8B8',
     textAlign: 'center',
     marginBottom: 32,
   },
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   },
   input: {
     width: '100%',
-    backgroundColor: '#1E293B',
+    backgroundColor: '#16161F',
     color: '#fff',
     borderRadius: 8,
     paddingHorizontal: 16,
@@ -105,11 +105,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     letterSpacing: 8,
     borderWidth: 1,
-    borderColor: '#334155',
+    borderColor: '#2D2D3F',
   },
   button: {
     width: '100%',
-    backgroundColor: '#2563EB',
+    backgroundColor: '#6B46C1',
     borderRadius: 8,
     paddingVertical: 14,
     alignItems: 'center',
@@ -117,5 +117,5 @@ const styles = StyleSheet.create({
   buttonDisabled: { opacity: 0.6 },
   buttonText: { color: '#fff', fontSize: 16, fontWeight: '600' },
   cancelButton: { marginTop: 16 },
-  cancelText: { color: '#94A3B8', fontSize: 14 },
+  cancelText: { color: '#A8A8B8', fontSize: 14 },
 });

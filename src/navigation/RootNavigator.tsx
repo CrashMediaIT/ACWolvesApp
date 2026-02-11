@@ -22,7 +22,7 @@ export default function RootNavigator() {
   if (state.isLoading) {
     return (
       <View style={styles.loading}>
-        <ActivityIndicator size="large" color="#2563EB" />
+        <ActivityIndicator size="large" color="#6B46C1" />
       </View>
     );
   }
@@ -47,6 +47,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#0B1929',
+    backgroundColor: '#0A0A0F',
   },
 });

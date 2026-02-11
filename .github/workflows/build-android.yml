@@ -14,6 +14,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      EXPO_PUBLIC_API_URL: https://api.arcticwolves.ca
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4

@@ -46,7 +46,7 @@ const AthletesStack = createNativeStackNavigator();
 const MoreStack = createNativeStackNavigator();
 
 const screenOptions = {
-  headerStyle: { backgroundColor: '#0F172A' },
+  headerStyle: { backgroundColor: '#13131A' },
   headerTintColor: '#fff',
 };
 
@@ -158,9 +158,9 @@ export default function MainTabs() {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarStyle: { backgroundColor: '#0F172A', borderTopColor: '#1E293B' },
-        tabBarActiveTintColor: '#2563EB',
-        tabBarInactiveTintColor: '#64748B',
+        tabBarStyle: { backgroundColor: '#13131A', borderTopColor: '#2D2D3F' },
+        tabBarActiveTintColor: '#6B46C1',
+        tabBarInactiveTintColor: '#6B6B7B',
       }}
     >
       <Tab.Screen

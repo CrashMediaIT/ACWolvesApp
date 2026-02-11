@@ -76,11 +76,11 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#0B1929' },
+  container: { flex: 1, backgroundColor: '#0A0A0F' },
   header: { padding: 24, alignItems: 'center' },
   icon: { fontSize: 48, marginBottom: 8 },
   title: { fontSize: 24, fontWeight: '700', color: '#fff', marginBottom: 4 },
-  subtitle: { fontSize: 14, color: '#94A3B8', textAlign: 'center', textTransform: 'capitalize' },
+  subtitle: { fontSize: 14, color: '#A8A8B8', textAlign: 'center', textTransform: 'capitalize' },
   grid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -88,10 +88,10 @@ const styles = StyleSheet.create({
     paddingBottom: 32,
   },
   card: {
-    backgroundColor: '#1E293B',
+    backgroundColor: '#16161F',
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: '#334155',
+    borderColor: '#2D2D3F',
     width: '45%',
     margin: '2.5%',
     padding: 20,
