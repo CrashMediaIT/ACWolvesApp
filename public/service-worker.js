@@ -41,7 +41,10 @@ self.addEventListener('fetch', (event) => {
           caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
           return response;
         })
-        .catch(() => caches.match(request))
+        .catch((err) => {
+          console.warn('Network request failed:', err);
+          return caches.match(request);
+        })
     );
     return;
   }
