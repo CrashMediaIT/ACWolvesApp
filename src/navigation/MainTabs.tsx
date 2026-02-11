@@ -38,6 +38,7 @@ import VideoScreen from '../screens/video/VideoScreen';
 import ShopScreen from '../screens/shop/ShopScreen';
 import AdminScreen from '../screens/admin/AdminScreen';
 import ProfileScreen from '../screens/profile/ProfileScreen';
+import colors from '../theme/colors';
 
 const Tab = createBottomTabNavigator();
 const HomeStack = createNativeStackNavigator();
@@ -46,8 +47,8 @@ const AthletesStack = createNativeStackNavigator();
 const MoreStack = createNativeStackNavigator();
 
 const screenOptions = {
-  headerStyle: { backgroundColor: '#13131A' },
-  headerTintColor: '#fff',
+  headerStyle: { backgroundColor: colors.bgSecondary },
+  headerTintColor: colors.textWhite,
 };
 
 // ── Home Stack ────────────────────────────────────────────
@@ -158,9 +159,9 @@ export default function MainTabs() {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarStyle: { backgroundColor: '#13131A', borderTopColor: '#2D2D3F' },
-        tabBarActiveTintColor: '#6B46C1',
-        tabBarInactiveTintColor: '#6B6B7B',
+        tabBarStyle: { backgroundColor: colors.bgSecondary, borderTopColor: colors.border },
+        tabBarActiveTintColor: colors.primary,
+        tabBarInactiveTintColor: colors.textMuted,
       }}
     >
       <Tab.Screen

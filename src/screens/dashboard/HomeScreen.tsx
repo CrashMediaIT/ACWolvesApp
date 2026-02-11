@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { useAuth } from '../../contexts/AuthContext';
 import { accessibleSections, type AppSection } from '../../utils/roles';
+import colors from '../../theme/colors';
 
 const sectionMeta: Record<AppSection, { label: string; icon: string }> = {
   home: { label: 'Home', icon: '🏠' },
@@ -76,11 +77,11 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#0A0A0F' },
+  container: { flex: 1, backgroundColor: colors.bgMain },
   header: { padding: 24, alignItems: 'center' },
   icon: { fontSize: 48, marginBottom: 8 },
-  title: { fontSize: 24, fontWeight: '700', color: '#fff', marginBottom: 4 },
-  subtitle: { fontSize: 14, color: '#A8A8B8', textAlign: 'center', textTransform: 'capitalize' },
+  title: { fontSize: 24, fontWeight: '700', color: colors.textWhite, marginBottom: 4 },
+  subtitle: { fontSize: 14, color: colors.textSecondary, textAlign: 'center', textTransform: 'capitalize' },
   grid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -88,15 +89,15 @@ const styles = StyleSheet.create({
     paddingBottom: 32,
   },
   card: {
-    backgroundColor: '#16161F',
+    backgroundColor: colors.bgCard,
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: '#2D2D3F',
+    borderColor: colors.border,
     width: '45%',
     margin: '2.5%',
     padding: 20,
     alignItems: 'center',
   },
   cardIcon: { fontSize: 32, marginBottom: 8 },
-  cardLabel: { fontSize: 14, fontWeight: '600', color: '#fff', textAlign: 'center' },
+  cardLabel: { fontSize: 14, fontWeight: '600', color: colors.textWhite, textAlign: 'center' },
 });

@@ -12,6 +12,7 @@ import {
   Image,
 } from 'react-native';
 import { useAuth } from '../../contexts/AuthContext';
+import colors from '../../theme/colors';
 
 export default function LoginScreen() {
   const { signIn, state } = useAuth();
@@ -53,7 +54,7 @@ export default function LoginScreen() {
         <TextInput
           style={styles.input}
           placeholder="Email"
-          placeholderTextColor="#999"
+          placeholderTextColor={colors.textMuted}
           autoCapitalize="none"
           keyboardType="email-address"
           value={email}
@@ -64,7 +65,7 @@ export default function LoginScreen() {
         <TextInput
           style={styles.input}
           placeholder="Password"
-          placeholderTextColor="#999"
+          placeholderTextColor={colors.textMuted}
           secureTextEntry
           value={password}
           onChangeText={setPassword}
@@ -78,7 +79,7 @@ export default function LoginScreen() {
           disabled={state.isLoading}
         >
           {state.isLoading ? (
-            <ActivityIndicator color="#fff" />
+            <ActivityIndicator color={colors.textWhite} />
           ) : (
             <Text style={styles.buttonText}>Sign In</Text>
           )}
@@ -89,7 +90,7 @@ export default function LoginScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#0A0A0F' },
+  container: { flex: 1, backgroundColor: colors.bgMain },
   inner: {
     flex: 1,
     justifyContent: 'center',
@@ -97,34 +98,34 @@ const styles = StyleSheet.create({
     paddingHorizontal: 32,
   },
   logo: { width: 100, height: 100, marginBottom: 16 },
-  title: { fontSize: 28, fontWeight: '700', color: '#fff', marginBottom: 4 },
-  subtitle: { fontSize: 16, color: '#A8A8B8', marginBottom: 32 },
+  title: { fontSize: 28, fontWeight: '700', color: colors.textWhite, marginBottom: 4 },
+  subtitle: { fontSize: 16, color: colors.textSecondary, marginBottom: 32 },
   error: {
-    color: '#EF4444',
+    color: colors.error,
     marginBottom: 16,
     textAlign: 'center',
     fontSize: 14,
   },
   input: {
     width: '100%',
-    backgroundColor: '#16161F',
-    color: '#fff',
+    backgroundColor: colors.bgCard,
+    color: colors.textWhite,
     borderRadius: 8,
     paddingHorizontal: 16,
     paddingVertical: 14,
     fontSize: 16,
     marginBottom: 12,
     borderWidth: 1,
-    borderColor: '#2D2D3F',
+    borderColor: colors.border,
   },
   button: {
     width: '100%',
-    backgroundColor: '#6B46C1',
+    backgroundColor: colors.primary,
     borderRadius: 8,
     paddingVertical: 14,
     alignItems: 'center',
     marginTop: 8,
   },
   buttonDisabled: { opacity: 0.6 },
-  buttonText: { color: '#fff', fontSize: 16, fontWeight: '600' },
+  buttonText: { color: colors.textWhite, fontSize: 16, fontWeight: '600' },
 });

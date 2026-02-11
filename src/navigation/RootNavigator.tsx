@@ -13,6 +13,7 @@ import { useAuth } from '../contexts/AuthContext';
 import LoginScreen from '../screens/auth/LoginScreen';
 import Verify2FAScreen from '../screens/auth/Verify2FAScreen';
 import MainTabs from './MainTabs';
+import colors from '../theme/colors';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,7 +23,7 @@ export default function RootNavigator() {
   if (state.isLoading) {
     return (
       <View style={styles.loading}>
-        <ActivityIndicator size="large" color="#6B46C1" />
+        <ActivityIndicator size="large" color={colors.primary} />
       </View>
     );
   }
@@ -47,6 +48,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#0A0A0F',
+    backgroundColor: colors.bgMain,
   },
 });
