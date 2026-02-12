@@ -1,22 +1,16 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-  Alert,
-} from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import colors from '../../theme/colors';
 
-const healthSections = [
-  { label: 'Nutrition', icon: '🥗', desc: 'Track meals, macros, and meal plans' },
-  { label: 'Workouts', icon: '💪', desc: 'Off-ice workout programs and logs' },
-  { label: 'Sleep', icon: '😴', desc: 'Monitor sleep quality and patterns' },
-  { label: 'Injury Log', icon: '🩹', desc: 'Track injuries and recovery status' },
+const sections = [
+  { key: 'Nutrition', icon: '🥗', desc: 'Track meals, macros, and meal plans' },
+  { key: 'Workouts', icon: '💪', desc: 'Off-ice workout programs and logs' },
 ];
 
 export default function HealthScreen() {
+  const navigation = useNavigation<any>();
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
@@ -27,16 +21,16 @@ export default function HealthScreen() {
         </Text>
       </View>
 
-      {healthSections.map((item) => (
+      {sections.map((item) => (
         <TouchableOpacity
-          key={item.label}
+          key={item.key}
           style={styles.card}
           activeOpacity={0.7}
-          onPress={() => Alert.alert('Navigate', `Open ${item.label}`)}
+          onPress={() => navigation.navigate(item.key)}
         >
           <Text style={styles.cardIcon}>{item.icon}</Text>
           <View style={styles.cardBody}>
-            <Text style={styles.cardTitle}>{item.label}</Text>
+            <Text style={styles.cardTitle}>{item.key}</Text>
             <Text style={styles.cardDesc}>{item.desc}</Text>
           </View>
         </TouchableOpacity>
@@ -56,14 +50,14 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     marginBottom: 12,
     borderRadius: 12,
-    padding: 16,
+    padding: 24,
     borderWidth: 1,
     borderColor: colors.border,
     flexDirection: 'row',
     alignItems: 'center',
   },
-  cardIcon: { fontSize: 28, marginRight: 16 },
+  cardIcon: { fontSize: 36, marginRight: 16 },
   cardBody: { flex: 1 },
-  cardTitle: { fontSize: 16, fontWeight: '600', color: colors.textWhite, marginBottom: 2 },
-  cardDesc: { fontSize: 13, color: colors.textSecondary },
+  cardTitle: { fontSize: 18, fontWeight: '600', color: colors.textWhite, marginBottom: 4 },
+  cardDesc: { fontSize: 14, color: colors.textSecondary },
 });

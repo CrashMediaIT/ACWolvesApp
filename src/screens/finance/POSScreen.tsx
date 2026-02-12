@@ -1,38 +1,78 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  RefreshControl,
+  ActivityIndicator,
+  TouchableOpacity,
+} from 'react-native';
 import colors from '../../theme/colors';
+import { financeApi } from '../../api/services';
+import { useApiData } from '../../hooks/useApiData';
 
 export default function POSScreen() {
+  const { data, loading, error, refresh } = useApiData<unknown[]>(
+    () => financeApi.getTransactions(),
+  );
+
+  const items = (data ?? []) as Record<string, unknown>[];
+
+  if (loading && !data) {
+    return (
+      <View style={styles.center}>
+        <ActivityIndicator size="large" color={colors.primary} />
+      </View>
+    );
+  }
+
+  if (error && !data) {
+    return (
+      <View style={styles.center}>
+        <Text style={styles.errorText}>{error}</Text>
+        <TouchableOpacity style={styles.retryBtn} onPress={refresh}>
+          <Text style={styles.retryText}>Retry</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.icon}>🏪</Text>
-        <Text style={styles.title}>Point of Sale</Text>
-        <Text style={styles.subtitle}>
-          Front desk sales terminal for walk-in transactions
-        </Text>
-      </View>
-
-      <View style={styles.card}>
-        <Text style={styles.cardText}>
-          Process payments for sessions, merchandise, and drop-in fees.
-          Designed for front desk staff to handle quick transactions.
-        </Text>
-      </View>
-
-      <View style={styles.card}>
-        <Text style={styles.sectionTitle}>Quick Actions</Text>
-        <Text style={styles.cardText}>• New Sale</Text>
-        <Text style={styles.cardText}>• Session Drop-in</Text>
-        <Text style={styles.cardText}>• Merchandise Purchase</Text>
-        <Text style={styles.cardText}>• Refund</Text>
-      </View>
-    </ScrollView>
+    <FlatList
+      style={styles.container}
+      data={items}
+      keyExtractor={(_, i) => String(i)}
+      refreshControl={<RefreshControl refreshing={loading} onRefresh={refresh} tintColor={colors.primary} />}
+      ListHeaderComponent={
+        <View style={styles.header}>
+          <Text style={styles.icon}>🏪</Text>
+          <Text style={styles.title}>Point of Sale</Text>
+          <Text style={styles.subtitle}>Front desk sales terminal for walk-in transactions</Text>
+        </View>
+      }
+      ListEmptyComponent={
+        <View style={styles.card}>
+          <Text style={styles.emptyText}>No transactions found</Text>
+        </View>
+      }
+      renderItem={({ item }) => (
+        <View style={styles.card}>
+          {Object.entries(item).map(([key, value]) => (
+            <View key={key} style={styles.row}>
+              <Text style={styles.rowLabel}>{key}</Text>
+              <Text style={styles.rowValue}>{String(value ?? '—')}</Text>
+            </View>
+          ))}
+        </View>
+      )}
+    />
   );
 }
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.bgMain },
+  center: { flex: 1, backgroundColor: colors.bgMain, justifyContent: 'center', alignItems: 'center', padding: 24 },
   header: { padding: 24, alignItems: 'center' },
   icon: { fontSize: 48, marginBottom: 8 },
   title: { fontSize: 24, fontWeight: '700', color: colors.textWhite, marginBottom: 4 },
@@ -46,6 +86,16 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.border,
   },
-  sectionTitle: { fontSize: 16, fontWeight: '600', color: colors.textWhite, marginBottom: 8 },
-  cardText: { fontSize: 14, color: colors.textWhite, marginBottom: 4 },
+  row: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 6 },
+  rowLabel: { fontSize: 14, color: colors.textSecondary },
+  rowValue: { fontSize: 14, fontWeight: '600', color: colors.textWhite },
+  emptyText: { fontSize: 14, color: colors.textMuted, textAlign: 'center' },
+  errorText: { fontSize: 16, color: colors.error, marginBottom: 16, textAlign: 'center' },
+  retryBtn: {
+    backgroundColor: colors.primary,
+    paddingHorizontal: 24,
+    paddingVertical: 12,
+    borderRadius: 8,
+  },
+  retryText: { color: colors.textWhite, fontWeight: '600', fontSize: 14 },
 });

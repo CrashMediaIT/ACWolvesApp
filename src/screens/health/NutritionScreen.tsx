@@ -1,47 +1,73 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  RefreshControl,
+  ActivityIndicator,
+  TouchableOpacity,
+} from 'react-native';
 import colors from '../../theme/colors';
+import { healthApi } from '../../api/services';
+import { useApiData } from '../../hooks/useApiData';
 
 export default function NutritionScreen() {
+  const { data, loading, error, refresh } = useApiData<unknown>(
+    () => healthApi.getNutrition(0),
+  );
+
+  const entries = data ? Object.entries(data as Record<string, unknown>) : [];
+
+  if (loading && !data) {
+    return (
+      <View style={styles.center}>
+        <ActivityIndicator size="large" color={colors.primary} />
+      </View>
+    );
+  }
+
+  if (error && !data) {
+    return (
+      <View style={styles.center}>
+        <Text style={styles.errorText}>{error}</Text>
+        <TouchableOpacity style={styles.retryBtn} onPress={refresh}>
+          <Text style={styles.retryText}>Retry</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView
+      style={styles.container}
+      refreshControl={<RefreshControl refreshing={loading} onRefresh={refresh} tintColor={colors.primary} />}
+    >
       <View style={styles.header}>
         <Text style={styles.icon}>🥗</Text>
         <Text style={styles.title}>Nutrition</Text>
-        <Text style={styles.subtitle}>
-          Meal plans, calorie tracking, and nutritional guidance
-        </Text>
+        <Text style={styles.subtitle}>Meal plans, calorie tracking, and nutritional guidance</Text>
       </View>
 
-      <View style={styles.card}>
-        <Text style={styles.sectionTitle}>Today's Summary</Text>
-        <View style={styles.statRow}>
-          <Text style={styles.statLabel}>Calories</Text>
-          <Text style={styles.statValue}>— / — kcal</Text>
+      {entries.map(([key, value]) => (
+        <View key={key} style={styles.card}>
+          <Text style={styles.cardLabel}>{key}</Text>
+          <Text style={styles.cardValue}>{String(value ?? '—')}</Text>
         </View>
-        <View style={styles.statRow}>
-          <Text style={styles.statLabel}>Protein</Text>
-          <Text style={styles.statValue}>— g</Text>
-        </View>
-        <View style={styles.statRow}>
-          <Text style={styles.statLabel}>Carbs</Text>
-          <Text style={styles.statValue}>— g</Text>
-        </View>
-        <View style={styles.statRow}>
-          <Text style={styles.statLabel}>Fat</Text>
-          <Text style={styles.statValue}>— g</Text>
-        </View>
-      </View>
+      ))}
 
-      <View style={styles.card}>
-        <Text style={styles.emptyText}>Log your meals to get started</Text>
-      </View>
+      {entries.length === 0 && (
+        <View style={styles.card}>
+          <Text style={styles.emptyText}>No nutrition data available</Text>
+        </View>
+      )}
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.bgMain },
+  center: { flex: 1, backgroundColor: colors.bgMain, justifyContent: 'center', alignItems: 'center', padding: 24 },
   header: { padding: 24, alignItems: 'center' },
   icon: { fontSize: 48, marginBottom: 8 },
   title: { fontSize: 24, fontWeight: '700', color: colors.textWhite, marginBottom: 4 },
@@ -54,10 +80,19 @@ const styles = StyleSheet.create({
     padding: 16,
     borderWidth: 1,
     borderColor: colors.border,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
-  sectionTitle: { fontSize: 16, fontWeight: '600', color: colors.textWhite, marginBottom: 12 },
-  statRow: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 8 },
-  statLabel: { fontSize: 14, color: colors.textSecondary },
-  statValue: { fontSize: 14, fontWeight: '600', color: colors.textWhite },
-  emptyText: { fontSize: 14, color: colors.textMuted, textAlign: 'center' },
+  cardLabel: { fontSize: 14, color: colors.textSecondary, flex: 1 },
+  cardValue: { fontSize: 14, fontWeight: '600', color: colors.textWhite, flexShrink: 0 },
+  emptyText: { fontSize: 14, color: colors.textMuted, textAlign: 'center', flex: 1 },
+  errorText: { fontSize: 16, color: colors.error, marginBottom: 16, textAlign: 'center' },
+  retryBtn: {
+    backgroundColor: colors.primary,
+    paddingHorizontal: 24,
+    paddingVertical: 12,
+    borderRadius: 8,
+  },
+  retryText: { color: colors.textWhite, fontWeight: '600', fontSize: 14 },
 });
