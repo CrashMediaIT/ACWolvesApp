@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      EXPO_PUBLIC_API_URL: https://api.arcticwolves.ca
+      EXPO_PUBLIC_API_URL: https://api.arcticwolves.ca/v1
 
     steps:
       - name: Checkout repository
