@@ -22,13 +22,21 @@ function splitName(name: string | undefined): { firstName: string; lastName: str
 
 /** Build an app-level User from a backend user object. */
 function toUser(raw: Record<string, unknown>): User {
-  const { firstName, lastName } = splitName(
-    (raw.first_name || raw.last_name)
-      ? `${raw.first_name ?? ''} ${raw.last_name ?? ''}`.trim()
-      : (raw.name as string | undefined),
-  );
+  // Prefer discrete first_name / last_name when available (e.g. /users/me).
+  // Fall back to splitting a combined "name" field (e.g. /auth/login).
+  let firstName: string;
+  let lastName: string;
 
-  const role = (raw.role as string) ?? 'athlete';
+  if (raw.first_name || raw.last_name) {
+    firstName = (raw.first_name as string) ?? '';
+    lastName = (raw.last_name as string) ?? '';
+  } else {
+    const parts = splitName(raw.name as string | undefined);
+    firstName = parts.firstName;
+    lastName = parts.lastName;
+  }
+
+  const role = (raw.role as string) ?? '';
 
   return {
     id: raw.id as number,
@@ -37,6 +45,7 @@ function toUser(raw: Record<string, unknown>): User {
     lastName,
     role: role as User['role'],
     roles: [role] as User['roles'],
+    // Backend does not expose 2FA status in its API responses.
     is2FAEnabled: false,
   };
 }
@@ -56,6 +65,7 @@ export async function login(credentials: LoginCredentials): Promise<ApiResponse<
       data: {
         user: toUser(raw.user as Record<string, unknown>),
         token: raw.api_key as string,
+        // Backend does not support 2FA; field kept for app compatibility.
         requires2FA: false,
       },
     };
@@ -77,11 +87,17 @@ export async function verify2FA(userId: number, code: string): Promise<ApiRespon
 
   if (raw.success && raw.user) {
     const token = await getToken();
+    if (!token) {
+      return {
+        success: false,
+        error: 'No active session token found',
+      };
+    }
     return {
       success: true,
       data: {
         user: toUser(raw.user as Record<string, unknown>),
-        token: token ?? '',
+        token,
         requires2FA: false,
       },
     };
