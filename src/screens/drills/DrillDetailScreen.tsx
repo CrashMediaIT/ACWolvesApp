@@ -1,41 +1,37 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { useRoute } from '@react-navigation/native';
 import colors from '../../theme/colors';
+import type { Drill } from '../../types';
 
 export default function DrillDetailScreen() {
-  return (
-    <ScrollView style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.icon}>🎯</Text>
-        <Text style={styles.title}>Drill Detail</Text>
-        <Text style={styles.subtitle}>
-          Step-by-step drill breakdown and instructions
-        </Text>
-      </View>
+  const route = useRoute();
+  const { drill } = route.params as { drill: Drill };
 
-      <View style={styles.card}>
-        <Text style={styles.label}>Title</Text>
-        <Text style={styles.value}>—</Text>
+  return (
+    <ScrollView style={styles.container} contentContainerStyle={styles.content}>
+      <View style={styles.header}>
+        <Text style={styles.title}>{drill.title}</Text>
       </View>
 
       <View style={styles.card}>
         <Text style={styles.label}>Category</Text>
-        <Text style={styles.value}>—</Text>
+        <Text style={styles.value}>{drill.category}</Text>
       </View>
 
       <View style={styles.card}>
         <Text style={styles.label}>Difficulty</Text>
-        <Text style={styles.value}>—</Text>
+        <Text style={styles.value}>{drill.difficulty}</Text>
       </View>
 
       <View style={styles.card}>
         <Text style={styles.label}>Duration</Text>
-        <Text style={styles.value}>— min</Text>
+        <Text style={styles.value}>{drill.duration} min</Text>
       </View>
 
       <View style={styles.card}>
         <Text style={styles.label}>Description</Text>
-        <Text style={styles.cardText}>Drill instructions will appear here.</Text>
+        <Text style={styles.cardText}>{drill.description}</Text>
       </View>
     </ScrollView>
   );
@@ -43,13 +39,11 @@ export default function DrillDetailScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.bgMain },
-  header: { padding: 24, alignItems: 'center' },
-  icon: { fontSize: 48, marginBottom: 8 },
-  title: { fontSize: 24, fontWeight: '700', color: colors.textWhite, marginBottom: 4 },
-  subtitle: { fontSize: 14, color: colors.textSecondary, textAlign: 'center' },
+  content: { padding: 16 },
+  header: { marginBottom: 12 },
+  title: { fontSize: 24, fontWeight: '700', color: colors.textWhite },
   card: {
     backgroundColor: colors.bgCard,
-    marginHorizontal: 16,
     marginBottom: 12,
     borderRadius: 12,
     padding: 16,
@@ -58,5 +52,5 @@ const styles = StyleSheet.create({
   },
   label: { fontSize: 12, color: colors.textSecondary, marginBottom: 4, textTransform: 'uppercase' },
   value: { fontSize: 16, color: colors.textWhite },
-  cardText: { fontSize: 14, color: colors.textWhite },
+  cardText: { fontSize: 14, color: colors.textWhite, lineHeight: 20 },
 });
