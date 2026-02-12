@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { Text, Image } from 'react-native';
+import { Text, Image, StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useAuth } from '../contexts/AuthContext';
@@ -62,7 +62,7 @@ function HomeStackScreen() {
           headerTitle: () => (
             <Image
               source={require('../../assets/ArcticWolves.png')}
-              style={{ width: 32, height: 32 }}
+              style={headerStyles.logo}
               resizeMode="contain"
             />
           ),
@@ -215,3 +215,7 @@ export default function MainTabs() {
     </Tab.Navigator>
   );
 }
+
+const headerStyles = StyleSheet.create({
+  logo: { width: 32, height: 32 },
+});
