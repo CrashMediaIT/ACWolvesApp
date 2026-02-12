@@ -11,19 +11,36 @@ const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL ?? 'https://api.arcticwolve
 
 const TOKEN_KEY = 'auth_token';
 
+/**
+ * expo-secure-store is not available on web – fall back to localStorage.
+ * Use typeof document check which is reliable at module evaluation time.
+ */
+const isWeb = typeof document !== 'undefined';
+
 /** Store auth token securely */
 export async function setToken(token: string): Promise<void> {
-  await SecureStore.setItemAsync(TOKEN_KEY, token);
+  if (isWeb) {
+    localStorage.setItem(TOKEN_KEY, token);
+  } else {
+    await SecureStore.setItemAsync(TOKEN_KEY, token);
+  }
 }
 
 /** Retrieve the stored auth token */
 export async function getToken(): Promise<string | null> {
+  if (isWeb) {
+    return localStorage.getItem(TOKEN_KEY);
+  }
   return SecureStore.getItemAsync(TOKEN_KEY);
 }
 
 /** Remove stored auth token on logout */
 export async function removeToken(): Promise<void> {
-  await SecureStore.deleteItemAsync(TOKEN_KEY);
+  if (isWeb) {
+    localStorage.removeItem(TOKEN_KEY);
+  } else {
+    await SecureStore.deleteItemAsync(TOKEN_KEY);
+  }
 }
 
 /**

@@ -13,6 +13,8 @@ const colors = {
   bgSecondary: '#13131A',
   /** Card and panel backgrounds */
   bgCard: '#16161F',
+  /** Sidebar background */
+  sidebar: '#0D0D14',
 
   /** Primary brand color – Deep Purple */
   primary: '#6B46C1',
@@ -20,6 +22,8 @@ const colors = {
   primaryHover: '#7C3AED',
   /** Lighter purple accent */
   primaryLight: '#8B5CF6',
+  /** Accent colour */
+  accent: '#8B5CF6',
 
   /** Primary text */
   textWhite: '#FFFFFF',
@@ -30,12 +34,15 @@ const colors = {
 
   /** Default border color */
   border: '#2D2D3F',
+  /** Lighter border */
+  borderLight: '#3A3A4F',
 
   /** Semantic status colours */
   success: '#10B981',
   warning: '#F59E0B',
   error: '#EF4444',
   danger: '#DC2626',
+  info: '#3B82F6',
 } as const;
 
 export default colors;
