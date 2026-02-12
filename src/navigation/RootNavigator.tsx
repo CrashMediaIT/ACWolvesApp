@@ -8,7 +8,7 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { ActivityIndicator, View, StyleSheet } from 'react-native';
+import { ActivityIndicator, View, StyleSheet, Image } from 'react-native';
 import { useAuth } from '../contexts/AuthContext';
 import LoginScreen from '../screens/auth/LoginScreen';
 import Verify2FAScreen from '../screens/auth/Verify2FAScreen';
@@ -23,6 +23,11 @@ export default function RootNavigator() {
   if (state.isLoading) {
     return (
       <View style={styles.loading}>
+        <Image
+          source={require('../../assets/ArcticWolves.png')}
+          style={styles.logo}
+          resizeMode="contain"
+        />
         <ActivityIndicator size="large" color={colors.primary} />
       </View>
     );
@@ -49,5 +54,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.bgMain,
+  },
+  logo: {
+    width: 80,
+    height: 80,
+    marginBottom: 16,
   },
 });

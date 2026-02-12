@@ -6,6 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Alert,
+  Image,
 } from 'react-native';
 import { useAuth } from '../../contexts/AuthContext';
 import { accessibleSections, type AppSection } from '../../utils/roles';
@@ -47,7 +48,11 @@ export default function HomeScreen() {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.icon}>🐺</Text>
+        <Image
+          source={require('../../../assets/ArcticWolves.png')}
+          style={styles.logo}
+          resizeMode="contain"
+        />
         <Text style={styles.title}>
           Welcome, {user?.firstName ?? 'Player'}!
         </Text>
@@ -79,7 +84,7 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.bgMain },
   header: { padding: 24, alignItems: 'center' },
-  icon: { fontSize: 48, marginBottom: 8 },
+  logo: { width: 64, height: 64, marginBottom: 8 },
   title: { fontSize: 24, fontWeight: '700', color: colors.textWhite, marginBottom: 4 },
   subtitle: { fontSize: 14, color: colors.textSecondary, textAlign: 'center', textTransform: 'capitalize' },
   grid: {

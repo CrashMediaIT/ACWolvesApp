@@ -107,6 +107,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             dispatch({ type: 'REQUIRE_2FA', userId: res.data.user.id });
           } else if (res.data?.user) {
             dispatch({ type: 'SIGN_IN', user: res.data.user });
+          } else {
+            throw new Error('Invalid login response');
           }
         } catch (err) {
           dispatch({ type: 'SET_LOADING', isLoading: false });
@@ -122,6 +124,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           if (!res.success) throw new Error(res.error ?? '2FA verification failed');
           if (res.data?.user) {
             dispatch({ type: 'SIGN_IN', user: res.data.user });
+          } else {
+            throw new Error('Invalid 2FA response');
           }
         } catch (err) {
           dispatch({ type: 'SET_LOADING', isLoading: false });

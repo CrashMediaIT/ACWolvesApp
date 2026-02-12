@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, Image, StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useAuth } from '../contexts/AuthContext';
@@ -55,7 +55,19 @@ const screenOptions = {
 function HomeStackScreen() {
   return (
     <HomeStack.Navigator screenOptions={screenOptions}>
-      <HomeStack.Screen name="Dashboard" component={HomeScreen} />
+      <HomeStack.Screen
+        name="Dashboard"
+        component={HomeScreen}
+        options={{
+          headerTitle: () => (
+            <Image
+              source={require('../../assets/ArcticWolves.png')}
+              style={headerStyles.logo}
+              resizeMode="contain"
+            />
+          ),
+        }}
+      />
       <HomeStack.Screen name="Schedule" component={ScheduleScreen} />
       <HomeStack.Screen name="Notifications" component={NotificationsScreen} />
     </HomeStack.Navigator>
@@ -203,3 +215,7 @@ export default function MainTabs() {
     </Tab.Navigator>
   );
 }
+
+const headerStyles = StyleSheet.create({
+  logo: { width: 32, height: 32 },
+});
