@@ -7,7 +7,9 @@ import {
   RefreshControl,
   ActivityIndicator,
 } from 'react-native';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import colors from '../../theme/colors';
+import { faBullseye } from '../../theme/icons';
 import { evaluationsApi } from '../../api/services';
 import { useApiData } from '../../hooks/useApiData';
 import type { Evaluation } from '../../types';
@@ -43,7 +45,7 @@ export default function GoalsScreen() {
       }
     >
       <View style={styles.header}>
-        <Text style={styles.icon}>🥅</Text>
+        <FontAwesomeIcon icon={faBullseye} size={48} color={colors.primary} style={styles.icon} />
         <Text style={styles.title}>Goals</Text>
       </View>
 
@@ -86,7 +88,7 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.bgMain },
   center: { justifyContent: 'center', alignItems: 'center' },
   header: { padding: 24, alignItems: 'center' },
-  icon: { fontSize: 48, marginBottom: 8 },
+  icon: { marginBottom: 8 },
   title: { fontSize: 24, fontWeight: '700', color: colors.textWhite, marginBottom: 4 },
   card: {
     backgroundColor: colors.bgCard,

@@ -8,7 +8,9 @@ import {
   ActivityIndicator,
   TouchableOpacity,
 } from 'react-native';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import colors from '../../theme/colors';
+import { faChartLine } from '../../theme/icons';
 import { reportsApi } from '../../api/services';
 import { useApiData } from '../../hooks/useApiData';
 
@@ -46,7 +48,7 @@ export default function ReportsScreen() {
       refreshControl={<RefreshControl refreshing={loading} onRefresh={refresh} tintColor={colors.primary} />}
       ListHeaderComponent={
         <View style={styles.header}>
-          <Text style={styles.icon}>📈</Text>
+          <FontAwesomeIcon icon={faChartLine} size={48} color={colors.primary} style={styles.icon} />
           <Text style={styles.title}>Reports</Text>
           <Text style={styles.subtitle}>Analytics, performance data, and exportable reports</Text>
         </View>
@@ -74,7 +76,7 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.bgMain },
   center: { flex: 1, backgroundColor: colors.bgMain, justifyContent: 'center', alignItems: 'center', padding: 24 },
   header: { padding: 24, alignItems: 'center' },
-  icon: { fontSize: 48, marginBottom: 8 },
+  icon: { marginBottom: 8 },
   title: { fontSize: 24, fontWeight: '700', color: colors.textWhite, marginBottom: 4 },
   subtitle: { fontSize: 14, color: colors.textSecondary, textAlign: 'center' },
   card: {

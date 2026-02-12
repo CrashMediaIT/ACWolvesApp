@@ -8,7 +8,9 @@ import {
   TouchableOpacity,
   RefreshControl,
 } from 'react-native';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import colors from '../../theme/colors';
+import { faVideo } from '../../theme/icons';
 import { useApiData } from '../../hooks/useApiData';
 import { videoApi } from '../../api/services';
 
@@ -39,7 +41,7 @@ export default function VideoScreen() {
   if (!data || data.length === 0) {
     return (
       <View style={styles.center}>
-        <Text style={styles.icon}>🎬</Text>
+        <FontAwesomeIcon icon={faVideo} size={48} color={colors.primary} style={styles.icon} />
         <Text style={styles.emptyText}>No videos</Text>
       </View>
     );
@@ -98,7 +100,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 24,
   },
-  icon: { fontSize: 48, marginBottom: 8 },
+  icon: { marginBottom: 8 },
   emptyText: { fontSize: 16, color: colors.textMuted, textAlign: 'center' },
   errorText: { fontSize: 14, color: colors.error, textAlign: 'center', marginBottom: 12 },
   retryButton: {

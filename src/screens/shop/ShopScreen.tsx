@@ -8,7 +8,9 @@ import {
   ActivityIndicator,
   TouchableOpacity,
 } from 'react-native';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import colors from '../../theme/colors';
+import { faStore } from '../../theme/icons';
 import { shopApi } from '../../api/services';
 import { useApiData } from '../../hooks/useApiData';
 
@@ -46,7 +48,7 @@ export default function ShopScreen() {
       refreshControl={<RefreshControl refreshing={loading} onRefresh={refresh} tintColor={colors.primary} />}
       ListHeaderComponent={
         <View style={styles.header}>
-          <Text style={styles.icon}>🛍️</Text>
+          <FontAwesomeIcon icon={faStore} size={48} color={colors.primary} style={styles.icon} />
           <Text style={styles.title}>Shop</Text>
           <Text style={styles.subtitle}>Arctic Wolves merchandise, apparel, and equipment</Text>
         </View>
@@ -83,7 +85,7 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.bgMain },
   center: { flex: 1, backgroundColor: colors.bgMain, justifyContent: 'center', alignItems: 'center', padding: 24 },
   header: { padding: 24, alignItems: 'center' },
-  icon: { fontSize: 48, marginBottom: 8 },
+  icon: { marginBottom: 8 },
   title: { fontSize: 24, fontWeight: '700', color: colors.textWhite, marginBottom: 4 },
   subtitle: { fontSize: 14, color: colors.textSecondary, textAlign: 'center' },
   card: {

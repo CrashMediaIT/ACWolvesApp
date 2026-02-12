@@ -8,33 +8,52 @@ import {
   Alert,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { useAuth } from '../../contexts/AuthContext';
 import { canAccess } from '../../utils/roles';
 import type { AppSection } from '../../utils/roles';
 import type { UserRole } from '../../types';
 import colors from '../../theme/colors';
+import {
+  faClipboardList,
+  faFileLines,
+  faClipboardCheck,
+  faBullseye,
+  faHeartPulse,
+  faChartPie,
+  faCashRegister,
+  faMoneyCheckDollar,
+  faChartLine,
+  faComments,
+  faVideo,
+  faStore,
+  faUserGear,
+  faSignOutAlt,
+  faChevronRight,
+  type IconDefinition,
+} from '../../theme/icons';
 
 interface MenuItem {
   label: string;
-  icon: string;
+  icon: IconDefinition;
   route: string;
   section: AppSection;
 }
 
 const MENU_ITEMS: MenuItem[] = [
-  { label: 'Drills', icon: '🏋️', route: 'Drills', section: 'drills' },
-  { label: 'Practice Plans', icon: '📋', route: 'PracticePlans', section: 'practicePlans' },
-  { label: 'Evaluations', icon: '📝', route: 'Evaluations', section: 'evaluations' },
-  { label: 'Goals', icon: '🎯', route: 'Goals', section: 'goals' },
-  { label: 'Health', icon: '❤️', route: 'Health', section: 'health' },
-  { label: 'Finance', icon: '💰', route: 'Finance', section: 'finance' },
-  { label: 'POS', icon: '🛒', route: 'POS', section: 'pos' },
-  { label: 'HR', icon: '👥', route: 'HR', section: 'hr' },
-  { label: 'Reports', icon: '📊', route: 'Reports', section: 'reports' },
-  { label: 'Messages', icon: '💬', route: 'Messages', section: 'messages' },
-  { label: 'Video', icon: '🎥', route: 'Video', section: 'video' },
-  { label: 'Shop', icon: '🛍️', route: 'Shop', section: 'shop' },
-  { label: 'Admin', icon: '⚙️', route: 'Admin', section: 'admin' },
+  { label: 'Drills', icon: faClipboardList, route: 'Drills', section: 'drills' },
+  { label: 'Practice Plans', icon: faFileLines, route: 'PracticePlans', section: 'practicePlans' },
+  { label: 'Evaluations', icon: faClipboardCheck, route: 'Evaluations', section: 'evaluations' },
+  { label: 'Goals', icon: faBullseye, route: 'Goals', section: 'goals' },
+  { label: 'Health', icon: faHeartPulse, route: 'Health', section: 'health' },
+  { label: 'Finance', icon: faChartPie, route: 'Finance', section: 'finance' },
+  { label: 'POS', icon: faCashRegister, route: 'POS', section: 'pos' },
+  { label: 'HR', icon: faMoneyCheckDollar, route: 'HR', section: 'hr' },
+  { label: 'Reports', icon: faChartLine, route: 'Reports', section: 'reports' },
+  { label: 'Messages', icon: faComments, route: 'Messages', section: 'messages' },
+  { label: 'Video', icon: faVideo, route: 'Video', section: 'video' },
+  { label: 'Shop', icon: faStore, route: 'Shop', section: 'shop' },
+  { label: 'Admin', icon: faUserGear, route: 'Admin', section: 'admin' },
 ];
 
 export default function ProfileScreen() {
@@ -83,15 +102,18 @@ export default function ProfileScreen() {
             ]}
             onPress={() => navigation.navigate(item.route)}
           >
-            <Text style={styles.menuIcon}>{item.icon}</Text>
+            <View style={styles.menuIconWrap}>
+              <FontAwesomeIcon icon={item.icon} size={16} color={colors.primary} />
+            </View>
             <Text style={styles.menuLabel}>{item.label}</Text>
-            <Text style={styles.chevron}>›</Text>
+            <FontAwesomeIcon icon={faChevronRight} size={12} color={colors.textSecondary} />
           </TouchableOpacity>
         ))}
       </View>
 
       {/* Logout */}
       <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+        <FontAwesomeIcon icon={faSignOutAlt} size={16} color={colors.textWhite} />
         <Text style={styles.logoutText}>Logout</Text>
       </TouchableOpacity>
     </ScrollView>
@@ -135,9 +157,8 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: colors.border,
   },
-  menuIcon: { fontSize: 20, marginRight: 12 },
+  menuIconWrap: { width: 32, alignItems: 'center', marginRight: 12 },
   menuLabel: { flex: 1, fontSize: 16, color: colors.textWhite },
-  chevron: { fontSize: 22, color: colors.textSecondary },
   logoutButton: {
     backgroundColor: colors.danger,
     marginHorizontal: 16,
@@ -146,6 +167,9 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 16,
     alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 8,
   },
   logoutText: { fontSize: 16, fontWeight: '700', color: colors.textWhite },
 });

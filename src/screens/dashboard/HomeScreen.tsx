@@ -10,37 +10,40 @@ import {
   RefreshControl,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { useAuth } from '../../contexts/AuthContext';
 import { accessibleSections, type AppSection } from '../../utils/roles';
 import { dashboardApi } from '../../api/services';
 import { useApiData } from '../../hooks/useApiData';
 import colors from '../../theme/colors';
+import { sectionIcons, faCalendarCheck, faUsers, faComments } from '../../theme/icons';
+import type { IconDefinition } from '../../theme/icons';
 
-const sectionMeta: Record<AppSection, { label: string; icon: string }> = {
-  home: { label: 'Home', icon: '🏠' },
-  sessions: { label: 'Sessions', icon: '🏒' },
-  schedule: { label: 'Schedule', icon: '📅' },
-  athletes: { label: 'Athletes', icon: '⛸️' },
-  drills: { label: 'Drills', icon: '🎯' },
-  practicePlans: { label: 'Practice Plans', icon: '📋' },
-  evaluations: { label: 'Evaluations', icon: '📊' },
-  goals: { label: 'Goals', icon: '🥅' },
-  health: { label: 'Health', icon: '💚' },
-  nutrition: { label: 'Nutrition', icon: '🥗' },
-  workouts: { label: 'Workouts', icon: '💪' },
-  video: { label: 'Video', icon: '🎬' },
-  messages: { label: 'Messages', icon: '✉️' },
-  notifications: { label: 'Notifications', icon: '🔔' },
-  reports: { label: 'Reports', icon: '📈' },
-  finance: { label: 'Finance', icon: '💰' },
-  pos: { label: 'POS', icon: '🏪' },
-  shop: { label: 'Shop', icon: '🛍️' },
-  hr: { label: 'HR', icon: '👥' },
-  admin: { label: 'Admin', icon: '⚙️' },
-  profile: { label: 'Profile', icon: '👤' },
-  stats: { label: 'Stats', icon: '📉' },
-  teamRoster: { label: 'Team Roster', icon: '📝' },
-  campCheckin: { label: 'Camp Check-in', icon: '✅' },
+const sectionLabels: Record<AppSection, string> = {
+  home: 'Home',
+  sessions: 'Sessions',
+  schedule: 'Schedule',
+  athletes: 'Athletes',
+  drills: 'Drills',
+  practicePlans: 'Practice Plans',
+  evaluations: 'Evaluations',
+  goals: 'Goals',
+  health: 'Health',
+  nutrition: 'Nutrition',
+  workouts: 'Workouts',
+  video: 'Video',
+  messages: 'Messages',
+  notifications: 'Notifications',
+  reports: 'Reports',
+  finance: 'Finance',
+  pos: 'POS',
+  shop: 'Shop',
+  hr: 'HR',
+  admin: 'Admin',
+  profile: 'Profile',
+  stats: 'Stats',
+  teamRoster: 'Team Roster',
+  campCheckin: 'Camp Check-in',
 };
 
 // Maps sections that live in the tab navigator directly
@@ -105,10 +108,10 @@ export default function HomeScreen() {
     }
   };
 
-  const statCards: { label: string; value: number; icon: string }[] = [
-    { label: 'Upcoming Sessions', value: stats?.upcoming_sessions ?? 0, icon: '🏒' },
-    { label: 'Total Athletes', value: stats?.total_athletes ?? 0, icon: '⛸️' },
-    { label: 'Unread Messages', value: stats?.unread_messages ?? 0, icon: '✉️' },
+  const statCards: { label: string; value: number; icon: IconDefinition }[] = [
+    { label: 'Upcoming Sessions', value: stats?.upcoming_sessions ?? 0, icon: faCalendarCheck },
+    { label: 'Total Athletes', value: stats?.total_athletes ?? 0, icon: faUsers },
+    { label: 'Unread Messages', value: stats?.unread_messages ?? 0, icon: faComments },
   ];
 
   return (
@@ -153,7 +156,7 @@ export default function HomeScreen() {
         <View style={styles.statsRow}>
           {statCards.map((card) => (
             <View key={card.label} style={styles.statCard}>
-              <Text style={styles.statIcon}>{card.icon}</Text>
+              <FontAwesomeIcon icon={card.icon} size={20} color={colors.primary} style={styles.statIcon} />
               <Text style={styles.statValue}>{card.value}</Text>
               <Text style={styles.statLabel}>{card.label}</Text>
             </View>
@@ -163,7 +166,8 @@ export default function HomeScreen() {
 
       <View style={styles.grid}>
         {sections.map((section) => {
-          const meta = sectionMeta[section];
+          const label = sectionLabels[section];
+          const icon = sectionIcons[section];
           return (
             <TouchableOpacity
               key={section}
@@ -171,8 +175,8 @@ export default function HomeScreen() {
               activeOpacity={0.7}
               onPress={() => handleNavigate(section)}
             >
-              <Text style={styles.cardIcon}>{meta.icon}</Text>
-              <Text style={styles.cardLabel}>{meta.label}</Text>
+              <FontAwesomeIcon icon={icon} size={28} color={colors.primary} style={styles.cardIconFA} />
+              <Text style={styles.cardLabel}>{label}</Text>
             </TouchableOpacity>
           );
         })}
@@ -212,7 +216,7 @@ const styles = StyleSheet.create({
     padding: 12,
     alignItems: 'center',
   },
-  statIcon: { fontSize: 20, marginBottom: 4 },
+  statIcon: { marginBottom: 4 },
   statValue: { fontSize: 22, fontWeight: '700', color: colors.textWhite },
   statLabel: { fontSize: 11, color: colors.textSecondary, textAlign: 'center', marginTop: 2 },
   grid: {
@@ -231,6 +235,6 @@ const styles = StyleSheet.create({
     padding: 20,
     alignItems: 'center',
   },
-  cardIcon: { fontSize: 32, marginBottom: 8 },
+  cardIconFA: { marginBottom: 8 },
   cardLabel: { fontSize: 14, fontWeight: '600', color: colors.textWhite, textAlign: 'center' },
 });

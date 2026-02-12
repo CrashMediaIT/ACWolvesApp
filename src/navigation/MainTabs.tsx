@@ -6,11 +6,13 @@
  */
 
 import React from 'react';
-import { Text, Image, StyleSheet } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { useAuth } from '../contexts/AuthContext';
 import { canAccess } from '../utils/roles';
+import { faHouse, faCalendarCheck, faUsers, faBars } from '../theme/icons';
 
 // ── Screens ───────────────────────────────────────────────
 import HomeScreen from '../screens/dashboard/HomeScreen';
@@ -153,15 +155,6 @@ function MoreStackScreen() {
   );
 }
 
-// ── Tab icon helper ───────────────────────────────────────
-function TabIcon({ emoji, focused }: { emoji: string; focused: boolean }) {
-  return (
-    <Text style={{ fontSize: 22, opacity: focused ? 1 : 0.5 }}>
-      {emoji}
-    </Text>
-  );
-}
-
 // ── Main Tabs ─────────────────────────────────────────────
 export default function MainTabs() {
   const { state } = useAuth();
@@ -181,7 +174,9 @@ export default function MainTabs() {
         component={HomeStackScreen}
         options={{
           title: 'Home',
-          tabBarIcon: ({ focused }) => <TabIcon emoji="🏠" focused={focused} />,
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesomeIcon icon={faHouse} size={size} color={color} />
+          ),
         }}
       />
       {canAccess(roles, 'sessions') && (
@@ -190,7 +185,9 @@ export default function MainTabs() {
           component={SessionsStackScreen}
           options={{
             title: 'Sessions',
-            tabBarIcon: ({ focused }) => <TabIcon emoji="🏒" focused={focused} />,
+            tabBarIcon: ({ color, size }) => (
+              <FontAwesomeIcon icon={faCalendarCheck} size={size} color={color} />
+            ),
           }}
         />
       )}
@@ -200,7 +197,9 @@ export default function MainTabs() {
           component={AthletesStackScreen}
           options={{
             title: 'Athletes',
-            tabBarIcon: ({ focused }) => <TabIcon emoji="⛸️" focused={focused} />,
+            tabBarIcon: ({ color, size }) => (
+              <FontAwesomeIcon icon={faUsers} size={size} color={color} />
+            ),
           }}
         />
       )}
@@ -209,7 +208,9 @@ export default function MainTabs() {
         component={MoreStackScreen}
         options={{
           title: 'More',
-          tabBarIcon: ({ focused }) => <TabIcon emoji="☰" focused={focused} />,
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesomeIcon icon={faBars} size={size} color={color} />
+          ),
         }}
       />
     </Tab.Navigator>
