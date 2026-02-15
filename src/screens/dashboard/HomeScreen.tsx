@@ -13,6 +13,7 @@ import { useNavigation } from '@react-navigation/native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { useAuth } from '../../contexts/AuthContext';
 import { accessibleSections, type AppSection } from '../../utils/roles';
+import { getGreeting } from '../../utils/greeting';
 import { dashboardApi } from '../../api/services';
 import { useApiData } from '../../hooks/useApiData';
 import colors from '../../theme/colors';
@@ -132,7 +133,7 @@ export default function HomeScreen() {
           resizeMode="contain"
         />
         <Text style={styles.title}>
-          Welcome, {user?.firstName ?? 'Player'}!
+          {getGreeting()}, {user?.firstName ?? 'Player'}!
         </Text>
         <Text style={styles.subtitle}>
           Role: {roles.join(', ').replace(/_/g, ' ') || 'N/A'}
