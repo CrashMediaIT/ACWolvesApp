@@ -145,3 +145,50 @@ export type MainTabParamList = {
   Athletes: undefined;
   More: undefined;
 };
+
+/** Team linked between the main application and the game plan module */
+export interface Team {
+  id: number;
+  name: string;
+  ageGroup: string;
+  organization: string;
+  season: string;
+}
+
+/**
+ * Player on a team roster.
+ *
+ * Players may or may not have an Arctic Wolves user account.
+ * - `userId` is set when the player is linked to an existing user.
+ * - When `userId` is null the player profile exists only within the
+ *   roster (no login credentials, no account-level data sent out).
+ * - `isLinked` is a convenience flag derived from `userId !== null`.
+ */
+export interface RosterPlayer {
+  id: number;
+  teamId: number;
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+  position: string;
+  jerseyNumber: string;
+  /** null when player is not linked to an Arctic Wolves user account */
+  userId: number | null;
+  /** true when linked to an existing user account */
+  isLinked: boolean;
+  email: string;
+  phone: string;
+  notes: string;
+}
+
+/** Game plan entry associated with a team */
+export interface GamePlan {
+  id: number;
+  teamId: number;
+  title: string;
+  opponent: string;
+  date: string;
+  location: string;
+  notes: string;
+  status: 'draft' | 'final';
+}

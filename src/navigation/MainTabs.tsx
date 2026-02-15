@@ -40,6 +40,10 @@ import VideoScreen from '../screens/video/VideoScreen';
 import ShopScreen from '../screens/shop/ShopScreen';
 import AdminScreen from '../screens/admin/AdminScreen';
 import ProfileScreen from '../screens/profile/ProfileScreen';
+import GamePlanScreen from '../screens/gameplan/GamePlanScreen';
+import RosterScreen from '../screens/gameplan/RosterScreen';
+import AddPlayerScreen from '../screens/gameplan/AddPlayerScreen';
+import PlayerDetailScreen from '../screens/gameplan/PlayerDetailScreen';
 import colors from '../theme/colors';
 
 const Tab = createBottomTabNavigator();

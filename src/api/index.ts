@@ -16,4 +16,7 @@ export {
   videoApi,
   shopApi,
   adminApi,
+  teamsApi,
+  rostersApi,
+  gamePlansApi,
 } from './services';

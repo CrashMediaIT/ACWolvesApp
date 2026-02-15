@@ -44,6 +44,10 @@ import {
   faUserTie,
   faCalendarPlus,
   faCircleXmark,
+  faChessBoard,
+  faUserPlus,
+  faLink,
+  faLinkSlash,
   type IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
 import type { AppSection } from '../utils/roles';
@@ -74,6 +78,7 @@ export const sectionIcons: Record<AppSection, IconDefinition> = {
   stats: faChartBar,
   teamRoster: faUsersGear,
   campCheckin: faCheckCircle,
+  gamePlan: faChessBoard,
 };
 
 export {
@@ -114,6 +119,10 @@ export {
   faUserTie,
   faCalendarPlus,
   faCircleXmark,
+  faChessBoard,
+  faUserPlus,
+  faLink,
+  faLinkSlash,
 };
 
 export type { IconDefinition };

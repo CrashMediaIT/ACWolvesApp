@@ -12,6 +12,9 @@ import type {
   Evaluation,
   Message,
   Notification,
+  Team,
+  RosterPlayer,
+  GamePlan,
 } from '../types';
 
 // ── Sessions ──────────────────────────────────────────────
@@ -138,4 +141,53 @@ export const adminApi = {
   getSettings: () => api.get<ApiResponse<unknown>>('/admin/settings'),
   updateSettings: (data: Record<string, unknown>) =>
     api.put<ApiResponse<unknown>>('/admin/settings', data),
+};
+
+// ── Teams (Game Plan module) ──────────────────────────────
+export const teamsApi = {
+  list: () => api.get<ApiResponse<Team[]>>('/teams'),
+  get: (id: number) => api.get<ApiResponse<Team>>(`/teams/${id}`),
+  create: (data: Partial<Team>) => api.post<ApiResponse<Team>>('/teams', data),
+  update: (id: number, data: Partial<Team>) =>
+    api.put<ApiResponse<Team>>(`/teams/${id}`, data),
+  delete: (id: number) => api.delete<ApiResponse<void>>(`/teams/${id}`),
+};
+
+// ── Rosters (Game Plan module) ────────────────────────────
+export const rostersApi = {
+  /** List all players on a team roster */
+  listByTeam: (teamId: number) =>
+    api.get<ApiResponse<RosterPlayer[]>>(`/teams/${teamId}/roster`),
+  /** Get a single roster player */
+  get: (teamId: number, playerId: number) =>
+    api.get<ApiResponse<RosterPlayer>>(`/teams/${teamId}/roster/${playerId}`),
+  /** Add a player to the roster (may or may not be linked to a user) */
+  addPlayer: (teamId: number, data: Partial<RosterPlayer>) =>
+    api.post<ApiResponse<RosterPlayer>>(`/teams/${teamId}/roster`, data),
+  /** Update a roster player */
+  updatePlayer: (teamId: number, playerId: number, data: Partial<RosterPlayer>) =>
+    api.put<ApiResponse<RosterPlayer>>(`/teams/${teamId}/roster/${playerId}`, data),
+  /** Remove a player from the roster */
+  removePlayer: (teamId: number, playerId: number) =>
+    api.delete<ApiResponse<void>>(`/teams/${teamId}/roster/${playerId}`),
+  /** Link a roster player to an existing Arctic Wolves user account */
+  linkUser: (teamId: number, playerId: number, userId: number) =>
+    api.post<ApiResponse<RosterPlayer>>(`/teams/${teamId}/roster/${playerId}/link`, { userId }),
+  /** Unlink a roster player from their user account */
+  unlinkUser: (teamId: number, playerId: number) =>
+    api.post<ApiResponse<RosterPlayer>>(`/teams/${teamId}/roster/${playerId}/unlink`),
+};
+
+// ── Game Plans ────────────────────────────────────────────
+export const gamePlansApi = {
+  listByTeam: (teamId: number) =>
+    api.get<ApiResponse<GamePlan[]>>(`/teams/${teamId}/game-plans`),
+  get: (teamId: number, planId: number) =>
+    api.get<ApiResponse<GamePlan>>(`/teams/${teamId}/game-plans/${planId}`),
+  create: (teamId: number, data: Partial<GamePlan>) =>
+    api.post<ApiResponse<GamePlan>>(`/teams/${teamId}/game-plans`, data),
+  update: (teamId: number, planId: number, data: Partial<GamePlan>) =>
+    api.put<ApiResponse<GamePlan>>(`/teams/${teamId}/game-plans/${planId}`, data),
+  delete: (teamId: number, planId: number) =>
+    api.delete<ApiResponse<void>>(`/teams/${teamId}/game-plans/${planId}`),
 };
