@@ -15,6 +15,11 @@ import type {
   Team,
   RosterPlayer,
   GamePlan,
+  TeamEvent,
+  CalendarImportEntry,
+  CalendarImportPayload,
+  CalendarImportResult,
+  TeamNameMatch,
 } from '../types';
 
 // ── Sessions ──────────────────────────────────────────────
@@ -190,4 +195,41 @@ export const gamePlansApi = {
     api.put<ApiResponse<GamePlan>>(`/teams/${teamId}/game-plans/${planId}`, data),
   delete: (teamId: number, planId: number) =>
     api.delete<ApiResponse<void>>(`/teams/${teamId}/game-plans/${planId}`),
+};
+
+// ── Team Events (practices & games on the game-plan calendar) ─
+export const teamEventsApi = {
+  /** List events for a team – also visible in assigned coach's main schedule */
+  listByTeam: (teamId: number) =>
+    api.get<ApiResponse<TeamEvent[]>>(`/teams/${teamId}/events`),
+  get: (teamId: number, eventId: number) =>
+    api.get<ApiResponse<TeamEvent>>(`/teams/${teamId}/events/${eventId}`),
+  create: (teamId: number, data: Partial<TeamEvent>) =>
+    api.post<ApiResponse<TeamEvent>>(`/teams/${teamId}/events`, data),
+  update: (teamId: number, eventId: number, data: Partial<TeamEvent>) =>
+    api.put<ApiResponse<TeamEvent>>(`/teams/${teamId}/events/${eventId}`, data),
+  delete: (teamId: number, eventId: number) =>
+    api.delete<ApiResponse<void>>(`/teams/${teamId}/events/${eventId}`),
+};
+
+// ── Calendar Import ───────────────────────────────────────
+export const calendarImportApi = {
+  /**
+   * Step 1 – Upload a calendar file (CSV / ICS).
+   * Returns parsed entries and team-name match suggestions.
+   */
+  parse: (fileUri: string) => {
+    const body = new FormData();
+    body.append('file', { uri: fileUri, name: 'calendar', type: 'text/csv' } as unknown as Blob);
+    return api.post<ApiResponse<{ entries: CalendarImportEntry[]; teamMatches: TeamNameMatch[] }>>(
+      '/calendar-import/parse',
+      body,
+    );
+  },
+  /**
+   * Step 2 – Finalise import after user has assigned a season
+   * and confirmed / resolved team name matches.
+   */
+  confirm: (payload: CalendarImportPayload) =>
+    api.post<ApiResponse<CalendarImportResult>>('/calendar-import/confirm', payload),
 };

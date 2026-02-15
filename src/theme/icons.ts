@@ -48,6 +48,8 @@ import {
   faUserPlus,
   faLink,
   faLinkSlash,
+  faFileImport,
+  faPlus,
   type IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
 import type { AppSection } from '../utils/roles';
@@ -123,6 +125,8 @@ export {
   faUserPlus,
   faLink,
   faLinkSlash,
+  faFileImport,
+  faPlus,
 };
 
 export type { IconDefinition };

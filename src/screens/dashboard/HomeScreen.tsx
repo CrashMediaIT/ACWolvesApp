@@ -45,6 +45,7 @@ const sectionLabels: Record<AppSection, string> = {
   stats: 'Stats',
   teamRoster: 'Team Roster',
   campCheckin: 'Camp Check-in',
+  gamePlan: 'Game Plan',
 };
 
 // Maps sections that live in the tab navigator directly
@@ -80,6 +81,7 @@ const moreScreenMap: Record<string, string> = {
   stats: 'Stats',
   teamRoster: 'TeamRoster',
   campCheckin: 'CampCheckin',
+  gamePlan: 'GamePlan',
 };
 
 interface DashboardStats {

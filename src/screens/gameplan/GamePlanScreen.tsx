@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faChevronRight } from '../../theme/icons';
+import { faUsers, faCalendar } from '../../theme/icons';
 import { teamsApi } from '../../api/services';
 import { useApiData } from '../../hooks/useApiData';
 import colors from '../../theme/colors';
@@ -50,19 +50,31 @@ export default function GamePlanScreen() {
       data={teams}
       keyExtractor={(item) => String(item.id)}
       renderItem={({ item }) => (
-        <TouchableOpacity
-          style={styles.card}
-          onPress={() => navigation.navigate('Roster', { team: item })}
-        >
+        <View style={styles.card}>
           <View style={styles.cardBody}>
             <Text style={styles.cardTitle}>{item.name}</Text>
             <Text style={styles.cardText}>
               {item.organization} · {item.ageGroup}
             </Text>
-            <Text style={styles.cardText}>{item.season}</Text>
+            <Text style={styles.cardText}>Season: {item.season}</Text>
           </View>
-          <FontAwesomeIcon icon={faChevronRight} size={14} color={colors.textMuted} />
-        </TouchableOpacity>
+          <View style={styles.cardActions}>
+            <TouchableOpacity
+              style={styles.actionButton}
+              onPress={() => navigation.navigate('Roster', { team: item })}
+            >
+              <FontAwesomeIcon icon={faUsers} size={14} color={colors.primary} />
+              <Text style={styles.actionText}>Roster</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.actionButton}
+              onPress={() => navigation.navigate('TeamCalendar', { team: item })}
+            >
+              <FontAwesomeIcon icon={faCalendar} size={14} color={colors.primary} />
+              <Text style={styles.actionText}>Calendar</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
       )}
       refreshControl={
         <RefreshControl refreshing={loading} onRefresh={refresh} tintColor={colors.primary} />
@@ -88,12 +100,23 @@ const styles = StyleSheet.create({
     padding: 16,
     borderWidth: 1,
     borderColor: colors.border,
-    flexDirection: 'row',
-    alignItems: 'center',
   },
-  cardBody: { flex: 1 },
+  cardBody: { marginBottom: 12 },
   cardTitle: { fontSize: 16, fontWeight: '600', color: colors.textWhite, marginBottom: 2 },
   cardText: { fontSize: 14, color: colors.textSecondary, marginTop: 2 },
+  cardActions: { flexDirection: 'row', gap: 10 },
+  actionButton: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.bgMain,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: colors.border,
+    paddingVertical: 10,
+  },
+  actionText: { fontSize: 13, fontWeight: '600', color: colors.primary, marginLeft: 6 },
   emptyText: { fontSize: 14, color: colors.textMuted, textAlign: 'center' },
   errorText: { fontSize: 14, color: colors.error, marginBottom: 12, textAlign: 'center' },
   retryButton: { backgroundColor: colors.primary, paddingHorizontal: 24, paddingVertical: 10, borderRadius: 8 },

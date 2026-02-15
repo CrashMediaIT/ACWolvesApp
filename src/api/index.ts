@@ -19,4 +19,6 @@ export {
   teamsApi,
   rostersApi,
   gamePlansApi,
+  teamEventsApi,
+  calendarImportApi,
 } from './services';
