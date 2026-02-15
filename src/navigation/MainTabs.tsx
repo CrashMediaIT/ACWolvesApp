@@ -40,6 +40,13 @@ import VideoScreen from '../screens/video/VideoScreen';
 import ShopScreen from '../screens/shop/ShopScreen';
 import AdminScreen from '../screens/admin/AdminScreen';
 import ProfileScreen from '../screens/profile/ProfileScreen';
+import GamePlanScreen from '../screens/gameplan/GamePlanScreen';
+import RosterScreen from '../screens/gameplan/RosterScreen';
+import AddPlayerScreen from '../screens/gameplan/AddPlayerScreen';
+import PlayerDetailScreen from '../screens/gameplan/PlayerDetailScreen';
+import TeamCalendarScreen from '../screens/gameplan/TeamCalendarScreen';
+import AddEventScreen from '../screens/gameplan/AddEventScreen';
+import ImportCalendarScreen from '../screens/gameplan/ImportCalendarScreen';
 import colors from '../theme/colors';
 
 const Tab = createBottomTabNavigator();
@@ -150,6 +157,17 @@ function MoreStackScreen() {
       )}
       {canAccess(roles, 'admin') && (
         <MoreStack.Screen name="Admin" component={AdminScreen} />
+      )}
+      {canAccess(roles, 'gamePlan') && (
+        <>
+          <MoreStack.Screen name="GamePlan" component={GamePlanScreen} options={{ title: 'Game Plan' }} />
+          <MoreStack.Screen name="Roster" component={RosterScreen} options={{ title: 'Roster' }} />
+          <MoreStack.Screen name="AddPlayer" component={AddPlayerScreen} options={{ title: 'Add Player' }} />
+          <MoreStack.Screen name="PlayerDetail" component={PlayerDetailScreen} options={{ title: 'Player' }} />
+          <MoreStack.Screen name="TeamCalendar" component={TeamCalendarScreen} options={{ title: 'Team Calendar' }} />
+          <MoreStack.Screen name="AddEvent" component={AddEventScreen} options={{ title: 'Add Event' }} />
+          <MoreStack.Screen name="ImportCalendar" component={ImportCalendarScreen} options={{ title: 'Import Calendar' }} />
+        </>
       )}
     </MoreStack.Navigator>
   );

@@ -33,7 +33,8 @@ export type AppSection =
   | 'profile'
   | 'stats'
   | 'teamRoster'
-  | 'campCheckin';
+  | 'campCheckin'
+  | 'gamePlan';
 
 /**
  * Defines which sections each role can access.
@@ -44,12 +45,12 @@ const roleSections: Record<UserRole, AppSection[]> = {
     'home', 'sessions', 'schedule', 'athletes', 'drills', 'practicePlans',
     'evaluations', 'goals', 'health', 'nutrition', 'workouts', 'video',
     'messages', 'notifications', 'reports', 'finance', 'pos', 'shop',
-    'hr', 'admin', 'profile', 'stats', 'teamRoster', 'campCheckin',
+    'hr', 'admin', 'profile', 'stats', 'teamRoster', 'campCheckin', 'gamePlan',
   ],
   coach: [
     'home', 'sessions', 'schedule', 'athletes', 'drills', 'practicePlans',
     'evaluations', 'goals', 'video', 'messages', 'notifications', 'reports',
-    'profile', 'stats', 'teamRoster',
+    'profile', 'stats', 'teamRoster', 'gamePlan',
   ],
   health_coach: [
     'home', 'sessions', 'schedule', 'athletes', 'drills', 'practicePlans',
@@ -58,7 +59,7 @@ const roleSections: Record<UserRole, AppSection[]> = {
   ],
   team_coach: [
     'home', 'sessions', 'schedule', 'athletes', 'evaluations', 'goals',
-    'video', 'messages', 'notifications', 'profile', 'stats', 'teamRoster',
+    'video', 'messages', 'notifications', 'profile', 'stats', 'teamRoster', 'gamePlan',
   ],
   athlete: [
     'home', 'sessions', 'schedule', 'evaluations', 'goals', 'health',

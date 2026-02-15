@@ -13,6 +13,7 @@ import { useNavigation } from '@react-navigation/native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { useAuth } from '../../contexts/AuthContext';
 import { accessibleSections, type AppSection } from '../../utils/roles';
+import { getGreeting } from '../../utils/greeting';
 import { dashboardApi } from '../../api/services';
 import { useApiData } from '../../hooks/useApiData';
 import colors from '../../theme/colors';
@@ -44,6 +45,7 @@ const sectionLabels: Record<AppSection, string> = {
   stats: 'Stats',
   teamRoster: 'Team Roster',
   campCheckin: 'Camp Check-in',
+  gamePlan: 'Game Plan',
 };
 
 // Maps sections that live in the tab navigator directly
@@ -79,6 +81,7 @@ const moreScreenMap: Record<string, string> = {
   stats: 'Stats',
   teamRoster: 'TeamRoster',
   campCheckin: 'CampCheckin',
+  gamePlan: 'GamePlan',
 };
 
 interface DashboardStats {
@@ -132,7 +135,7 @@ export default function HomeScreen() {
           resizeMode="contain"
         />
         <Text style={styles.title}>
-          Welcome, {user?.firstName ?? 'Player'}!
+          {getGreeting()}, {user?.firstName ?? 'Player'}!
         </Text>
         <Text style={styles.subtitle}>
           Role: {roles.join(', ').replace(/_/g, ' ') || 'N/A'}

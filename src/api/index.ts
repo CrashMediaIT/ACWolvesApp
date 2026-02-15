@@ -16,4 +16,9 @@ export {
   videoApi,
   shopApi,
   adminApi,
+  teamsApi,
+  rostersApi,
+  gamePlansApi,
+  teamEventsApi,
+  calendarImportApi,
 } from './services';
