@@ -213,6 +213,14 @@ export const teamEventsApi = {
 };
 
 // ── Calendar Import ───────────────────────────────────────
+
+/** File descriptor accepted by React Native FormData */
+interface RNFileDescriptor {
+  uri: string;
+  name: string;
+  type: string;
+}
+
 export const calendarImportApi = {
   /**
    * Step 1 – Upload a calendar file (CSV / ICS).
@@ -220,7 +228,9 @@ export const calendarImportApi = {
    */
   parse: (fileUri: string) => {
     const body = new FormData();
-    body.append('file', { uri: fileUri, name: 'calendar', type: 'text/csv' } as unknown as Blob);
+    const file: RNFileDescriptor = { uri: fileUri, name: 'calendar', type: 'text/csv' };
+    // React Native FormData accepts {uri, name, type} objects directly
+    body.append('file', file as unknown as Blob);
     return api.post<ApiResponse<{ entries: CalendarImportEntry[]; teamMatches: TeamNameMatch[] }>>(
       '/calendar-import/parse',
       body,
